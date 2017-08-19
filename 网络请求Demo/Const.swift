@@ -9,5 +9,6 @@
 import Foundation
 
 //let kUrl = "http://apiv2.yangkeduo.com/operation/15/groups"
-let kUrl = "http://219.135.58.4:5000/product/detail"
+//let kUrl = "http://219.135.58.4:5000/product/detail"
+let kUrl = "http://community.alllu.com/?api-threadList"
 

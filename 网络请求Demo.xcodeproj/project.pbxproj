@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D9B45251F482CAF00DCA5D0 /* BYFoundationLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D9B45241F482CAF00DCA5D0 /* BYFoundationLog.m */; };
 		6DC2C31B1F46E6D2004C8CCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC2C31A1F46E6D2004C8CCC /* AppDelegate.swift */; };
 		6DC2C31D1F46E6D2004C8CCC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC2C31C1F46E6D2004C8CCC /* ViewController.swift */; };
 		6DC2C3201F46E6D2004C8CCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DC2C31E1F46E6D2004C8CCC /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6D9B45241F482CAF00DCA5D0 /* BYFoundationLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYFoundationLog.m; sourceTree = "<group>"; };
 		6DC2C3171F46E6D2004C8CCC /* 网络请求Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "网络请求Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DC2C31A1F46E6D2004C8CCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6DC2C31C1F46E6D2004C8CCC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			children = (
 				6DC2C35E1F46EB3C004C8CCC /* Const.swift */,
 				6DC2C35C1F46EB30004C8CCC /* WZYNetworkTool.swift */,
+				6D9B45241F482CAF00DCA5D0 /* BYFoundationLog.m */,
 				6DC2C3481F46E850004C8CCC /* AFNetworking */,
 				6DC2C31A1F46E6D2004C8CCC /* AppDelegate.swift */,
 				6DC2C31C1F46E6D2004C8CCC /* ViewController.swift */,
@@ -317,6 +320,7 @@
 				6DC2C3591F46E850004C8CCC /* AFURLRequestSerialization.m in Sources */,
 				6DC2C3571F46E850004C8CCC /* AFNetworkReachabilityManager.m in Sources */,
 				6DC2C35A1F46E850004C8CCC /* AFURLResponseSerialization.m in Sources */,
+				6D9B45251F482CAF00DCA5D0 /* BYFoundationLog.m in Sources */,
 				6DC2C35D1F46EB30004C8CCC /* WZYNetworkTool.swift in Sources */,
 				6DC2C31B1F46E6D2004C8CCC /* AppDelegate.swift in Sources */,
 				6DC2C35F1F46EB3C004C8CCC /* Const.swift in Sources */,
@@ -572,6 +576,7 @@
 				6DC2C3411F46E6D2004C8CCC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6DC2C3421F46E6D2004C8CCC /* Build configuration list for PBXNativeTarget "网络请求DemoTests" */ = {
 			isa = XCConfigurationList;
@@ -580,6 +585,7 @@
 				6DC2C3441F46E6D2004C8CCC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6DC2C3451F46E6D2004C8CCC /* Build configuration list for PBXNativeTarget "网络请求DemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -588,6 +594,7 @@
 				6DC2C3471F46E6D2004C8CCC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

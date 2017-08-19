@@ -19,7 +19,8 @@ class WZYNetworkTool: AFHTTPSessionManager {
     
     static let shareInstance : WZYNetworkTool = {
         let toolInstance = WZYNetworkTool()
-        toolInstance.responseSerializer.acceptableContentTypes?.insert("text/plain")
+//        toolInstance.responseSerializer.acceptableContentTypes?.insert("text/plain")
+        toolInstance.responseSerializer.acceptableContentTypes?.insert("text/html")
         return toolInstance
     }()
 
