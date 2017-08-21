@@ -8,6 +8,15 @@
 
 import UIKit
 
+import Alamofire
+
+
+let SERVICE_URL     = "http://v.juhe.cn/toutiao/index?"     // 请求地址
+let APPKEY          = "ad2908cae6020addf38ffdb5e2255c06"    // 应用 APPKEY
+let TOP             = "top"                                 // 参数：头条
+
+
+
 class ViewController: UIViewController {
 
     //定义一个全局的字典
@@ -19,15 +28,21 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-//        let parameters = [
-//            "Id": "150529162646"
-//        ]
-
+//        methodForOC();
+        methodForSwift();
+       
+    }
+    //MARK:- OC方法的 AFNetworking
+    func methodForOC() -> Void {
+        //        let parameters = [
+        //            "Id": "150529162646"
+        //        ]
+        
         let parameters = [
             "pag": "1",
             "id": "144f248abf9789911c8ab1e903ec0f10"
         ]
-
+        
         
         WZYNetworkTool.shareInstance.request(requestType: .Get, url: kUrl, parameters: parameters, succeed: { (response) in
             guard let jsonData = response  else {
@@ -37,13 +52,13 @@ class ViewController: UIViewController {
             
             //字典接收 JSon 数据
             self.dataDict = jsonData;
-           //从字典中根据 key 提取 value 为数组的数据
+            //从字典中根据 key 提取 value 为数组的数据
             let dataArr = self.dataDict["data"] as! [Any];
             //从数组中提取字典
-           let anDict = dataArr[0] as! [String : Any];
+            let anDict = dataArr[0] as! [String : Any];
             //从字典中提值
-           self.userFaceStr = anDict["userFace"] as! String ;
-             self.getResult();
+            self.userFaceStr = anDict["userFace"] as! String ;
+            self.getResult();
         }) { (error) in
             
             guard let error = error else {
@@ -51,19 +66,65 @@ class ViewController: UIViewController {
             }
             print(error)
         }
-        
-       
+
     }
+    
     
     func getResult() {
         print("result数据: ",self.userFaceStr)
     }
 
+    
+    
+    //MARK:- Swift 的 Alamofire
+    func methodForSwift() -> Void {
+//        let urlStr = "\(SERVICE_URL)type=\(TOP)&key=\(APPKEY)"
+        
+        let parameters = [
+            "pag": "2",
+            "id": "144f248abf9789911c8ab1e903ec0f10"
+        ]
+        Alamofire.request(kUrl, method: .post, parameters: parameters).responseJSON { (returnResult) in
+            print("secondMethod --> 参数 --> returnResult = \(returnResult.value as Any)")
+            
+            
+            //字典接收 JSon 数据
+            self.dataDict = returnResult.value as! [String : Any] ;
+            //从字典中根据 key 提取 value 为数组的数据
+            let dataArr = self.dataDict["data"] as! [Any];
+            //从数组中提取字典
+            let anDict = dataArr[0] as! [String : Any];
+            //从字典中提值
+            self.userFaceStr = anDict["userFace"] as! String ;
+            self.getResult();
+
+            
+        }
+        
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+    
+    
+    //MARK:- 跳转
+    @IBAction func jumpToRefreshHandle(_ sender: Any) {
+        print("跳转到刷新")
+        
+        self.navigationController!.pushViewController(RefreshVC(), animated: true);
+        
+        
+        
+    }
+    
+    
+    
+    
+    
     
 }
 
