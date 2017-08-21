@@ -69,7 +69,7 @@ class RefreshVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
                 self.picArr.append(picStr);
             }
 //             print("title 数租: ",self.titleArr);
-
+            //主线程刷新 UI
             DispatchQueue.main.async {
                  self.makeTable();
                  self.forInArrayHandel();
