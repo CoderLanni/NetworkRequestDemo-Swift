@@ -22,11 +22,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfR-BO-Mnc">
-                                <rect key="frame" x="58" y="115" width="31" height="30"/>
+                                <rect key="frame" x="6" y="115" width="136" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="刷新"/>
+                                <state key="normal" title="TabelView 加载数据"/>
                                 <connections>
                                     <action selector="jumpToRefreshHandle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="178-8g-YqE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gJ-4l-kfT">
+                                <rect key="frame" x="156" y="190" width="62" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="简单刷新"/>
+                                <connections>
+                                    <action selector="sampleRefreshHandle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QJp-Ks-NkI"/>
                                 </connections>
                             </button>
                         </subviews>

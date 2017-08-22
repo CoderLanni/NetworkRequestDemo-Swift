@@ -56,7 +56,7 @@ class RefreshCell: UITableViewCell {
     }
 
     
-    //懒加载label
+
     
     
     override func setSelected(_ selected: Bool, animated: Bool) {

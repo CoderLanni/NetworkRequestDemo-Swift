@@ -21,34 +21,89 @@ class RefreshVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     var titleArr = Array<String>();
     var picArr = [String]();
     
+
+    var page = 1;
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+//          methodForSwift(str: page);
         
         initUI();
-        methodForSwift();
+      
        
     }
     
     func initUI() -> Void {
         self.title = "刷新"
         self.view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1);
+        makeTable();
         
+        dataTable.refreshHeader = LCRefreshHeader.init(refreshBlock: {[unowned self] in
+            print("header")
+            self.perform(#selector(self.headerRefresh), with: nil, afterDelay: 2)
+        })
+        
+       dataTable.refreshFooter = LCRefreshFooter.init(refreshBlock: {[unowned self] in
+            print("footer")
+            self.perform(#selector(self.footerRefresh), with: nil, afterDelay: 2)
+        })
+        
+        dataTable.tableFooterView = UIView.init(frame: CGRect(x: 0, y: 0, width: 300, height: 5))
+        headerRefresh();
 
     }
     
+    func headerRefresh() {
+        
+        if dataTable.isHeaderRefreshing() {
+            self.titleArr.removeAll();
+            self.picArr.removeAll();
+            page = 1;
+            methodForSwift(str: page);
+            
+            dataTable.reloadData()
+            
+            dataTable.resetDataLoad()
+            dataTable.endHeaderRefreshing()
+        }
+        
+        
+    }
+    
+    func footerRefresh() {
+        
+        if dataTable.isFooterRefreshing() {
+            page+=1;
+            methodForSwift(str: page);
+            dataTable.reloadData()
+            
+
+            dataTable.endFooterRefreshing()
+        }
+       //        //截止符
+//        if numRows > 60 {
+//            dataTable.setDataLoadover()
+//        }
+    }
+    
+    
+
     //MARK:- Networking
     /// Swift 的 Alamofire
-    func methodForSwift() -> Void {
+    func methodForSwift(str:Int) -> Void {
         //        let urlStr = "\(SERVICE_URL)type=\(TOP)&key=\(APPKEY)"
+        print("页数: ",str)
+        let num:String = String(str);
         
         let parameters = [
-            "pag": "2",
+            "pag": num,
             "id": "144f248abf9789911c8ab1e903ec0f10"
         ]
         Alamofire.request(kUrl, method: .post, parameters: parameters).responseJSON { (returnResult) in
-            print("secondMethod --> 参数 --> returnResult = \(returnResult.value as Any)")
+//            print("secondMethod --> 参数 --> returnResult = \(returnResult.value as Any)")
             
             
             //字典接收 JSon 数据
@@ -56,12 +111,10 @@ class RefreshVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
             //从字典中根据 key 提取 value 为数组的数据
             let dataArr = dataDict["data"] as! [Any];
             for dic in dataArr{
-                print("title 数值: ",dic);
+//                print("title 数值: ",dic);
                 //从数组中提取字典
                 let anDict = dic as! [String : Any];
                 //从字典中提值
-                let userFaceStr = anDict["userFace"] as! String ;
-                print("提取单个图片=地址: ",userFaceStr);
                 let picStr = anDict["userFace"] as! String ;
                 let titleStr = anDict["title"] as! String ;
                 
@@ -71,8 +124,10 @@ class RefreshVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 //             print("title 数租: ",self.titleArr);
             //主线程刷新 UI
             DispatchQueue.main.async {
-                 self.makeTable();
+
                  self.forInArrayHandel();
+                dataTable.reloadData()
+              
             }
         }
     }
@@ -87,7 +142,7 @@ class RefreshVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     // MARK:- 创建table
     func makeTable (){
        
-        dataTable=UITableView.init(frame: CGRect(x: 0.0, y: 64, width: kSize.width, height: kSize.height-64), style:.plain)
+        dataTable=UITableView.init(frame: CGRect(x: 0.0, y:0, width: kSize.width, height: kSize.height), style:.plain)
         dataTable.backgroundColor = UIColor.groupTableViewBackground;
         dataTable.delegate=self;//实现代理
         dataTable.dataSource=self;//实现数据源
@@ -105,6 +160,8 @@ class RefreshVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         //MARK:注册 xib Cell(使用 xib)
         let cellNib = UINib(nibName: "RefreshCell", bundle: nil)
         dataTable.register(cellNib, forCellReuseIdentifier: "identti")
+        
+        methodForSwift(str: page)
     }
     
     // MARK: -table代理
@@ -122,7 +179,7 @@ class RefreshVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     //行高
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        return 80
+        return 150
     }
     
     /*

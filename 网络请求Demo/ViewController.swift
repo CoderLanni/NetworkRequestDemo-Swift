@@ -122,6 +122,11 @@ class ViewController: UIViewController {
     }
     
     
+    @IBAction func sampleRefreshHandle(_ sender: Any) {
+        
+        self.navigationController!.pushViewController(RefreshTableViewController(), animated: true);
+        
+    }
     
     
     
